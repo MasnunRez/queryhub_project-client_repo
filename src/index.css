@@ -1,0 +1,30 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+:root {
+  --primary: #872341;
+  --secondary: #b0ca10;
+}
+
+
+.active {
+  font-weight: 500;
+  color: var(--primary);
+  text-decoration: inherit;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid var(--primary);
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  background-color: var(--primary);
+  color: white;
+}
