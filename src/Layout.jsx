@@ -9,6 +9,7 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth } from "./firebase.config";
+import Swal from "sweetalert2";
 
 export const valueContext = createContext();
 
@@ -21,12 +22,11 @@ const Layout = () => {
       .then((userCredential) => {
         const user = userCredential.user;
         // console.log(user);
-        // alert('Registration succeess')
-        // Swal.fire({
-        //   title: "Registered Successfully!",
-        //   icon: "success",
-        //   draggable: true,
-        // });
+        Swal.fire({
+          title: "Registered Successfully!",
+          icon: "success",
+          draggable: true,
+        });
         navigate("/");
         return user;
       })
