@@ -1,30 +1,7 @@
 import React, { useContext } from "react";
-import { Link, Navigate, NavLink, useLocation } from "react-router";
+import { Link, NavLink } from "react-router";
 import { valueContext } from "../Layout";
 
-export const PrivateRoute = ({ children }) => {
-  const { user, loading } = useContext(valueContext);
-  const location = useLocation();
-  // Loading spinner ---------------------
-  if (loading) {
-    return (
-      <div className="flex justify-center mt-[300px]">
-        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-violet-600"></div>
-      </div>
-    );
-  }
-  // Redirect to Login page --------------
-  if (!user || !user?.email) {
-    return (
-      <Navigate
-        to="/login"
-        state={{ from: location.pathname }}
-        replace
-      ></Navigate>
-    );
-  }
-  return children;
-};
 
 const NavBar = () => {
   // Bring Logout auth ---------------
@@ -102,6 +79,9 @@ const NavBar = () => {
             >
               Queries
             </NavLink>
+            
+      {user && (
+        <>
             <NavLink
               className="border border-gray-300 p-2 hover:text-[var(--primary)]"
               to="recforme"
@@ -120,6 +100,8 @@ const NavBar = () => {
             >
               My Recommendation
             </NavLink>
+        </>
+      )}
           </ul>
         </div>
         {/* Login Signup, profile ----------   */}
