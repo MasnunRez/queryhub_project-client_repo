@@ -1,7 +1,43 @@
-import React from "react";
-import { Link, NavLink } from "react-router";
+import React, { useContext } from "react";
+import { Link, Navigate, NavLink, useLocation } from "react-router";
+import { valueContext } from "../Layout";
+
+export const PrivateRoute = ({ children }) => {
+  const { user, loading } = useContext(valueContext);
+  const location = useLocation();
+  // Loading spinner ---------------------
+  if (loading) {
+    return (
+      <div className="flex justify-center mt-[300px]">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-violet-600"></div>
+      </div>
+    );
+  }
+  // Redirect to Login page --------------
+  if (!user || !user?.email) {
+    return (
+      <Navigate
+        to="/login"
+        state={{ from: location.pathname }}
+        replace
+      ></Navigate>
+    );
+  }
+  return children;
+};
 
 const NavBar = () => {
+  // Bring Logout auth ---------------
+  const { user, logoutUser } = useContext(valueContext);
+  // console.log(user);
+  // Set Logout User ------------------------------
+  const handleLogout = () => {
+    logoutUser()
+      .then(() => {})
+      .catch((error) => {
+        alert("Logout Error!!!", error);
+      });
+  };
   return (
     <div className=" shadow-sm">
       <div className="max-w-[1400px] mx-auto navbar bg-base-100  ">
@@ -47,20 +83,61 @@ const NavBar = () => {
               </li>
             </ul>
           </div>
-          <a className="font-bold text-2xl"><span className="text-[var(--primary)]">Q</span>uery <span className="text-[var(--primary)]">H</span>ub</a>
+          <a className="font-bold text-2xl">
+            <span className="text-[var(--primary)]">Q</span>uery{" "}
+            <span className="text-[var(--primary)]">H</span>ub
+          </a>
         </div>
         <div className="navbar-center hidden md:flex">
           <ul className="menu menu-horizontal px-1 font-bold">
-            <NavLink className="border border-gray-300 p-2 hover:text-[var(--primary)]" to="/">Home</NavLink>
-            <NavLink className="border border-gray-300 p-2 hover:text-[var(--primary)]" to="queries">Queries</NavLink>
-            <NavLink className="border border-gray-300 p-2 hover:text-[var(--primary)]" to="recforme">Recommendation For Me</NavLink>
-            <NavLink className="border border-gray-300 p-2 hover:text-[var(--primary)]" to="myqueries">My Queries</NavLink>
-            <NavLink className="border border-gray-300 p-2 hover:text-[var(--primary)]" to="myrecommendation">My Recommendation</NavLink>
+            <NavLink
+              className="border border-gray-300 p-2 hover:text-[var(--primary)]"
+              to="/"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              className="border border-gray-300 p-2 hover:text-[var(--primary)]"
+              to="queries"
+            >
+              Queries
+            </NavLink>
+            <NavLink
+              className="border border-gray-300 p-2 hover:text-[var(--primary)]"
+              to="recforme"
+            >
+              Recommendation For Me
+            </NavLink>
+            <NavLink
+              className="border border-gray-300 p-2 hover:text-[var(--primary)]"
+              to="myqueries"
+            >
+              My Queries
+            </NavLink>
+            <NavLink
+              className="border border-gray-300 p-2 hover:text-[var(--primary)]"
+              to="myrecommendation"
+            >
+              My Recommendation
+            </NavLink>
           </ul>
         </div>
-        <div className="navbar-end space-x-3">
-          <Link to="login"><button>Login</button></Link>
-          <Link to="signup"><button>Signup</button></Link>
+        {/* Login Signup, profile ----------   */}
+        <div className="navbar-end">
+          {user ? (
+            <div className="">
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+          ) : (
+            <div className="space-x-3">
+              <Link to="login">
+                <button>Login</button>
+              </Link>
+              <Link to="signup">
+                <button>Signup</button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -1,17 +1,25 @@
-import React from "react";
-import { Link } from "react-router";
+import React, { useContext } from "react";
 
-const handleSubmit = (e) => {
-  e.preventDefault();
-  const loginEmail = e.target.email.value;
-  const loginPassword = e.target.password.value;
-  console.log(loginEmail, loginPassword);
-  //   navigate(from, {replace:true});
-
-  // handleLogIn(loginEmail, loginPassword)
-};
+import { Link, useLocation, useNavigate } from "react-router";
+import { valueContext } from "../Layout";
 
 const Login = () => {
+  const { handleLogin } = useContext(valueContext);
+
+  // Redirect after Login -----
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const loginEmail = e.target.email.value;
+    const loginPassword = e.target.password.value;
+    console.log(loginEmail, loginPassword);
+    //   navigate(from, {replace:true});
+    navigate(from, { replace: true });
+    handleLogin(loginEmail, loginPassword);
+  };
   return (
     <div className="">
       <div className="w-full max-w-md mx-auto mt-10 p-4 rounded-md shadow sm:p-8 bg-gray-200 text-black">
