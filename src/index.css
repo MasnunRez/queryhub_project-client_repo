@@ -28,3 +28,20 @@ button:hover {
   background-color: var(--primary);
   color: white;
 }
+
+h2{
+  font-size: 32px;
+  text-align: center;
+  font-weight:600;
+}
+.banner {
+  background-image: url('/path-to-your-image.jpg');
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+}

@@ -3,7 +3,7 @@ import { Link } from "react-router";
 import { valueContext } from "../Layout";
 
 
-const SignUp = () => {
+const Registration = () => {
     const {handleSignup} = useContext(valueContext)
     
     const handleSubmit = (e) => {
@@ -115,4 +115,4 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+export default Registration;

@@ -8,11 +8,12 @@ import Queries from "./Pages/Queries";
 import RecoForMe from "./Pages/RecoForMe";
 import MyQueries from "./Pages/MyQueries";
 import MyRecommendation from "./Pages/MyRecommendation";
-import SignUp from "./Pages/SignUp";
+import Registration from "./Pages/Registration";
 import ErrorPage from "./Pages/ErrorPage";
 import Login from "./Pages/Login";
+import AddQueries from "./Pages/AddQueries";
 
- const router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout></Layout>,
@@ -30,21 +31,29 @@ import Login from "./Pages/Login";
         element: <RecoForMe></RecoForMe>,
       },
       {
-        path: "myqueries",
-        element: <MyQueries></MyQueries>,
-      },
-      {
         path: "myrecommendation",
         element: <MyRecommendation></MyRecommendation>,
+        children: [
+          {
+            path: "addqueries",
+            element: <AddQueries />,
+          },
+        ],
       },
       {
         path: "login",
         element: <Login></Login>,
       },
       {
-        path: "signup",
-        element: <SignUp></SignUp>,
+        path: "registration",
+        element: <Registration></Registration>,
       },
+      {
+        path: "myqueries",
+        element: <MyQueries />,
+        children: [],
+      },
+
       {
         path: "/*",
         element: <ErrorPage></ErrorPage>,

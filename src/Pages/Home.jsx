@@ -5,8 +5,15 @@ const Home = () => {
   return (
     <div>
       <div className="">
-      {/* <h1 className="text-2xl">Hello Query Hub</h1> */}
         <Slider></Slider>
+      </div>
+      {/* Recent queries Section ----  */}
+      <div className="">
+        <h2>Recent Queries</h2>
+        <div className="">
+          
+          {/* Enter new queries...........  */}
+        </div>
       </div>
     </div>
   );

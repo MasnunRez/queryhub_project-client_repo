@@ -25,7 +25,8 @@ const Footer = () => {
               <div className="flex space-x-3 pl-3">
                 <a
                   rel="noopener noreferrer"
-                  href="#"
+                  href="https://www.facebook.com/programmingHero/"
+                  target="blank"
                   title="Facebook"
                   className="flex items-center p-1"
                 >
@@ -41,7 +42,8 @@ const Footer = () => {
 
                 <a
                   rel="noopener noreferrer"
-                  href="#"
+                  href="https://bd.linkedin.com/company/programminghero"
+                  target="blank"
                   title="LinkedIn"
                   className="flex items-center p-1"
                 >

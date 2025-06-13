@@ -29,7 +29,7 @@ const Login = () => {
         <p className="text-sm text-center text-gray-900">
           Don't have an account?
           <Link to="/signup" className="focus:underline hover:underline">
-            Sign up here
+             Register here
           </Link>
         </p>
         <div className="my-6 space-y-4">
