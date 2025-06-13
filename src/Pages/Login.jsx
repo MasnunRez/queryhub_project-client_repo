@@ -2,8 +2,32 @@ import React, { useContext } from "react";
 
 import { Link, useLocation, useNavigate } from "react-router";
 import { valueContext } from "../Layout";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import Swal from "sweetalert2";
+import { auth } from "../firebase.config";
 
 const Login = () => {
+  const provider = new GoogleAuthProvider();
+
+  // Login with Google ------------------
+  const handleGoogleSignin = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        console.log(result);
+        navigate(from, { replace: true });
+        navigate("/")
+      })
+      .catch((error) => {
+        // alert(`${error.code}: ${error.message}`);
+        Swal.fire({
+          icon: "Error",
+          title: "Oops...",
+          text: `${error.code}: ${error.message}`,
+        });
+      });
+  };
+
+
   const { handleLogin } = useContext(valueContext);
 
   // Redirect after Login -----
@@ -29,12 +53,12 @@ const Login = () => {
         <p className="text-sm text-center text-gray-900">
           Don't have an account?
           <Link to="/signup" className="focus:underline hover:underline">
-             Register here
+            Register here
           </Link>
         </p>
         <div className="my-6 space-y-4">
           <button
-            // onClick={}
+            onClick={handleGoogleSignin}
             aria-label="Login with Google"
             type="button"
             className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 border-gray-400 focus:ring-violet-400"

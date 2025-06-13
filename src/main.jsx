@@ -33,12 +33,6 @@ const router = createBrowserRouter([
       {
         path: "myrecommendation",
         element: <MyRecommendation></MyRecommendation>,
-        children: [
-          {
-            path: "addqueries",
-            element: <AddQueries />,
-          },
-        ],
       },
       {
         path: "login",
@@ -51,9 +45,11 @@ const router = createBrowserRouter([
       {
         path: "myqueries",
         element: <MyQueries />,
-        children: [],
       },
-
+      {
+        path: "addqueries",
+        element: <AddQueries />,
+      },
       {
         path: "/*",
         element: <ErrorPage></ErrorPage>,

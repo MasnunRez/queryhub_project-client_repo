@@ -21,7 +21,7 @@ const MyQueries = () => {
             <p className="text-gray-200">
               Start building your query collection today.
             </p>
-            <Link to="addqueries">
+            <Link to="/addqueries">
               <button className="mt-7">+ Add Queries</button>
             </Link>
           </div>
