@@ -12,6 +12,7 @@ import Registration from "./Pages/Registration";
 import ErrorPage from "./Pages/ErrorPage";
 import Login from "./Pages/Login";
 import AddQueries from "./Pages/AddQueries";
+import { PrivateRoute } from "./Components/NavBar";
 
 const router = createBrowserRouter([
   {
@@ -28,11 +29,11 @@ const router = createBrowserRouter([
       },
       {
         path: "recforme",
-        element: <RecoForMe></RecoForMe>,
+        element: <PrivateRoute><RecoForMe></RecoForMe></PrivateRoute>,
       },
       {
         path: "myrecommendation",
-        element: <MyRecommendation></MyRecommendation>,
+        element: <PrivateRoute><MyRecommendation></MyRecommendation></PrivateRoute>,
       },
       {
         path: "login",
@@ -44,7 +45,8 @@ const router = createBrowserRouter([
       },
       {
         path: "myqueries",
-        element: <MyQueries />,
+        loader: ()=>fetch('http://localhost:5000/queries'),
+        element: <PrivateRoute><MyQueries /></PrivateRoute>,
       },
       {
         path: "addqueries",

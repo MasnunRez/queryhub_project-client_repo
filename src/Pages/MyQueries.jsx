@@ -1,7 +1,9 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, useLoaderData } from "react-router";
+import MyQueriesCard from "../Components/MyQueriesCard";
 
 const MyQueries = () => {
+  const queries = useLoaderData()
   return (
     <div className="max-w-[1400px] mx-auto">
       {/* Banner with Add queries ----  */}
@@ -22,10 +24,21 @@ const MyQueries = () => {
               Start building your query collection today.
             </p>
             <Link to="/addqueries">
-              <button className="mt-7">+ Add Queries</button>
+              <button className="mt-7 mainbtn">+ Add Queries</button>
             </Link>
           </div>
         </div>
+      </div>
+      {/* My Queries section ------------- */}
+      <div className="mt-8">
+        <h2>My Queries</h2>
+        <p className="text-center">Total: 10</p>
+        {/* Card ---------- */}
+        {
+          queries.map(query => (
+            <MyQueriesCard key={query._id} query={query}></MyQueriesCard>
+          ))
+        }
       </div>
     </div>
   );

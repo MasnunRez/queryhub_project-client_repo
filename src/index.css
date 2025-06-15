@@ -13,7 +13,7 @@
   text-decoration: inherit;
 }
 
-button {
+.mainbtn {
   border-radius: 8px;
   border: 1px solid var(--primary);
   padding: 0.6em 1.2em;
@@ -24,7 +24,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
+.mainbtn:hover {
   background-color: var(--primary);
   color: white;
 }

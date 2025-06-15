@@ -1,7 +1,24 @@
 import React, { useContext } from "react";
-import { Link, NavLink } from "react-router";
+import { Link, Navigate, NavLink, useLocation } from "react-router";
 import { valueContext } from "../Layout";
 
+// Private Route ---
+export const PrivateRoute = ({ children }) => {
+  const { user, loading } = useContext(valueContext);
+  const location = useLocation();
+
+  if (loading) {
+    return (
+      <div className="flex justify-center mt-[300px]">
+        <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-violet-600"></div>
+      </div>
+    );
+  }
+  if(!user || !user?.email){
+    return <Navigate to="/login" state={{from:location.pathname}} replace></Navigate>
+  }
+  return children
+};
 
 const NavBar = () => {
   // Bring Logout auth ---------------
@@ -79,44 +96,44 @@ const NavBar = () => {
             >
               Queries
             </NavLink>
-            
-      {user && (
-        <>
-            <NavLink
-              className="border border-gray-300 p-2 hover:text-[var(--primary)]"
-              to="recforme"
-            >
-              Recommendation For Me
-            </NavLink>
-            <NavLink
-              className="border border-gray-300 p-2 hover:text-[var(--primary)]"
-              to="myqueries"
-            >
-              My Queries
-            </NavLink>
-            <NavLink
-              className="border border-gray-300 p-2 hover:text-[var(--primary)]"
-              to="myrecommendation"
-            >
-              My Recommendation
-            </NavLink>
-        </>
-      )}
+
+            {user && (
+              <>
+                <NavLink
+                  className="border border-gray-300 p-2 hover:text-[var(--primary)]"
+                  to="recforme"
+                >
+                  Recommendation For Me
+                </NavLink>
+                <NavLink
+                  className="border border-gray-300 p-2 hover:text-[var(--primary)]"
+                  to="myqueries"
+                >
+                  My Queries
+                </NavLink>
+                <NavLink
+                  className="border border-gray-300 p-2 hover:text-[var(--primary)]"
+                  to="myrecommendation"
+                >
+                  My Recommendation
+                </NavLink>
+              </>
+            )}
           </ul>
         </div>
         {/* Login Signup, profile ----------   */}
         <div className="navbar-end">
           {user ? (
             <div className="">
-              <button onClick={handleLogout}>Logout</button>
+              <button className="mainbtn" onClick={handleLogout}>Logout</button>
             </div>
           ) : (
             <div className="space-x-3">
               <Link to="login">
-                <button>Login</button>
+                <button className="mainbtn">Login</button>
               </Link>
               <Link to="registration">
-                <button>Registration</button>
+                <button className="mainbtn">Registration</button>
               </Link>
             </div>
           )}

@@ -1,9 +1,36 @@
 import React from "react";
+import Swal from "sweetalert2";
 
 const AddQueries = () => {
 
+    const handleAddQuery = (e)=>{
+      e.preventDefault()
+      const form = e.target
+      const formData = new FormData(form)
+      const newQuery = Object.fromEntries(formData.entries())
+      console.log(newQuery);
 
-  
+      fetch("http://localhost:5000/queries",{
+        method:"POST",
+        headers:{"Content-type":"application/json"},
+        body:JSON.stringify(newQuery)
+      })
+      .then(res=> res.json())
+      .then(data=>{
+        if (data.insertedId) {
+          // console.log("Added suucess");
+          Swal.fire({
+            title: "Plant Added Successfully",
+            icon: "success",
+            draggable: true,
+          });
+        //   form.reset()
+        }
+      })
+      
+    }
+
+
   return (
     <div>
       <div className="relative overflow-hidden">
@@ -20,13 +47,14 @@ const AddQueries = () => {
               Add Query
             </h3>
             <div className="mt-8">
-              <form className="fieldset bg-gray-200 border-base-300 rounded-box w-md border p-8">
+              <form onSubmit={handleAddQuery} className="fieldset bg-gray-200 border-base-300 rounded-box w-md border p-8">
                 <h3 className="text-3xl text-center my-5 font-bold">
                   Insert your product info
                 </h3>
                 <label className="font-bold pt-3">Product Name</label>
                 <input
                   type="text"
+                  name="productName"
                   className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"
                   placeholder="Your product name"
                 />
@@ -34,6 +62,7 @@ const AddQueries = () => {
                 <label className="font-bold pt-3">Product Brand</label>
                 <input
                   type="text"
+                  name="productBrand"
                   className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"
                   placeholder="Your product brand"
                 />
@@ -41,6 +70,7 @@ const AddQueries = () => {
                 <label className="font-bold pt-3">Product Image URL</label>
                 <input
                   type="text"
+                  name="productImageUrl"
                   className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"
                   placeholder="Enter product image URL..."
                 />
@@ -48,6 +78,7 @@ const AddQueries = () => {
                 <label className="font-bold pt-3">Query Title</label>
                 <input
                   type="text"
+                  name="queryTitle"
                   className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"
                   placeholder="Your query title"
                 />
@@ -57,6 +88,7 @@ const AddQueries = () => {
                 </label>
                 <input
                   type="text"
+                  name="boycottingReason"
                   className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"
                   placeholder="Name"
                 />
