@@ -8,7 +8,7 @@ const AddQueries = () => {
       const form = e.target
       const formData = new FormData(form)
       const newQuery = Object.fromEntries(formData.entries())
-      console.log(newQuery);
+      // console.log(newQuery);
 
       fetch("http://localhost:5000/queries",{
         method:"POST",
@@ -20,7 +20,7 @@ const AddQueries = () => {
         if (data.insertedId) {
           // console.log("Added suucess");
           Swal.fire({
-            title: "Plant Added Successfully",
+            title: "Query Added Successfully",
             icon: "success",
             draggable: true,
           });

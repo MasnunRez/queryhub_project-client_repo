@@ -13,6 +13,7 @@ import ErrorPage from "./Pages/ErrorPage";
 import Login from "./Pages/Login";
 import AddQueries from "./Pages/AddQueries";
 import { PrivateRoute } from "./Components/NavBar";
+import UpdateQuery from "./Pages/UpdateQuery";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,11 @@ const router = createBrowserRouter([
       {
         path: "addqueries",
         element: <AddQueries />,
+      },
+      {
+        path: "updatequeries/:id",
+        loader: ({params})=>fetch(`http://localhost:5000/queries/${params.id}`),
+        element: <UpdateQuery></UpdateQuery>,
       },
       {
         path: "/*",
