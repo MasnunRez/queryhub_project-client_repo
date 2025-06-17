@@ -1,4 +1,4 @@
-import React, { Suspense, useContext } from "react";
+import React, { Suspense, useContext} from "react";
 import { Link } from "react-router";
 import MyQueryList from "./MyQueryList";
 import { valueContext } from "../Layout";
@@ -9,6 +9,7 @@ const myQueryPromise = email =>{
 
 const MyQueries = () => {
   const {user}=useContext(valueContext)
+  // const [myQueries, setMyQueries] = useState([]);
 
   return (
     <div className="max-w-[1400px] mx-auto">

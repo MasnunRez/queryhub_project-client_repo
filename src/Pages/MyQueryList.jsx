@@ -1,17 +1,22 @@
-import React, { use } from 'react';
-import { Link } from 'react-router';
-import MyQueriesCard from '../Components/MyQueriesCard';
+import React, {  use, useState } from "react";
+import MyQueriesCard from "../Components/MyQueriesCard";
 
-const MyQueryList = ({myQueryPromise}) => {
-    const myQueries = use(myQueryPromise)
-    return (
-        <div className="">
-            {
-                myQueries.map(myQuery=> 
-                <MyQueriesCard key={myQuery._id} myQuery={myQuery}></MyQueriesCard>)
-            }
-        </div>
-    );
+const MyQueryList = ({ myQueryPromise }) => {
+  const myQueries = use(myQueryPromise)
+  const [queries, setQueries]= useState(myQueries)
+  
+  return (
+    <div className="">
+      {queries.map((myQuery) => (
+        <MyQueriesCard
+          key={myQuery._id}
+          myQuery={myQuery}
+          queries={queries}
+          setQueries={setQueries}
+        ></MyQueriesCard>
+      ))}
+    </div>
+  );
 };
 
 export default MyQueryList;
