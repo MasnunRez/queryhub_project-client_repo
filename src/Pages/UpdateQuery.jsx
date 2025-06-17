@@ -3,19 +3,22 @@ import { useLoaderData } from "react-router";
 import Swal from "sweetalert2";
 
 const UpdateQuery = () => {
+  const data = useLoaderData();
+  const { _id, queryData = {} } = data;
   const {
     productImageUrl,
     queryTitle,
     boycottingReason,
     productName,
     productBrand,
-    _id,
-  } = useLoaderData();
+  } = queryData;
   const handleUpdateQuery = (e) => {
     e.preventDefault();
     const form = e.target;
     const formData = new FormData(form);
-    const updatedQuery = Object.fromEntries(formData.entries());
+    const updatedQuery = {
+      queryData: Object.fromEntries(formData.entries()),
+    };
     // console.log(newQuery);
 
     fetch(`http://localhost:5000/queries/${_id}`, {
@@ -29,7 +32,7 @@ const UpdateQuery = () => {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Plant updated successfully",
+            title: "Query updated successfully",
             showConfirmButton: false,
             timer: 1500,
           });

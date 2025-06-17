@@ -37,7 +37,10 @@ const MyQueries = () => {
       </div>
       {/* My Queries section ------------- */}
       <div className="">
-        <p>My Total Queries: {myQueryPromise.length}</p>
+        {
+          myQueryPromise.length===0 ? (<p>No queries found.</p>):
+        (<p>My Total Queries: {myQueryPromise.length}</p>)
+        }
         <Suspense fallback={'Loading query'}>
           <MyQueryList myQueryPromise={myQueryPromise(user.email)}>
 

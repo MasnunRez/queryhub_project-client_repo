@@ -26,16 +26,24 @@ const router = createBrowserRouter([
       },
       {
         path: "queries",
-        loader: ()=>fetch('http://localhost:5000/queries'),
+        loader: () => fetch("http://localhost:5000/queries"),
         element: <Queries></Queries>,
       },
       {
         path: "recforme",
-        element: <PrivateRoute><RecoForMe></RecoForMe></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <RecoForMe></RecoForMe>
+          </PrivateRoute>
+        ),
       },
       {
         path: "myrecommendation",
-        element: <PrivateRoute><MyRecommendation></MyRecommendation></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <MyRecommendation></MyRecommendation>
+          </PrivateRoute>
+        ),
       },
       {
         path: "login",
@@ -47,8 +55,11 @@ const router = createBrowserRouter([
       },
       {
         path: "myqueries",
-        // loader: ()=>fetch(`http://localhost:5000/queries/email?email=${email}`),
-        element: <PrivateRoute><MyQueries /></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <MyQueries />
+          </PrivateRoute>
+        ),
       },
       {
         path: "addqueries",
