@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 const QueriesCard = ({query}) => {
-  const {productImageUrl, queryTitle, boycottingReason, productName, _id}= query
+  const {productImageUrl, queryTitle, boycottingReason, productName}= query.queryData
 
     return (
         <div className="flex gap-4 p-4 bg-gray-200 rounded-2xl my-4">

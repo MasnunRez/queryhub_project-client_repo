@@ -1,10 +1,15 @@
-import React from "react";
-import MyQueriesCard from "../Components/MyQueriesCard";
+import React, { Suspense, useContext } from "react";
 import { Link } from "react-router";
 import MyQueryList from "./MyQueryList";
+import { valueContext } from "../Layout";
+
+const myQueryPromise = email =>{
+  return fetch(`http://localhost:5000/queries/email?email=${email}`).then(res=>res.json())
+}
 
 const MyQueries = () => {
-  
+  const {user}=useContext(valueContext)
+
   return (
     <div className="max-w-[1400px] mx-auto">
       {/* Banner with Add queries ----  */}
@@ -32,8 +37,12 @@ const MyQueries = () => {
       </div>
       {/* My Queries section ------------- */}
       <div className="">
-        <p>My Total Queries: </p>
-        <MyQueryList></MyQueryList>
+        <p>My Total Queries: {myQueryPromise.length}</p>
+        <Suspense fallback={'Loading query'}>
+          <MyQueryList myQueryPromise={myQueryPromise(user.email)}>
+
+          </MyQueryList>
+        </Suspense>
       </div>
     </div>
   );

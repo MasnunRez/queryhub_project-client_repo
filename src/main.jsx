@@ -47,6 +47,7 @@ const router = createBrowserRouter([
       },
       {
         path: "myqueries",
+        // loader: ()=>fetch(`http://localhost:5000/queries/email?email=${email}`),
         element: <PrivateRoute><MyQueries /></PrivateRoute>,
       },
       {
