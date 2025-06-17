@@ -20,7 +20,7 @@ const Registration = () => {
     <div className="">
       <div className="w-full max-w-md mx-auto mt-10 p-4 rounded-md shadow sm:p-8 bg-gray-200 text-black">
         <h2 className="mb-3 text-3xl font-semibold text-center">
-          Please SignUp
+          Please Register
         </h2>
         <p className="text-sm text-center text-gray-900">
           Already have an account?
@@ -57,6 +57,18 @@ const Registration = () => {
           className="space-y-8"
         >
           <div className="space-y-4">
+            <div className="space-y-2">
+              <label htmlFor="name" className="block text-sm">
+                Name
+              </label>
+              <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="Enter your name"
+                className="w-full px-3 py-2 border rounded-md border-gray-700 bg-gray-300 text-black focus:border-[var(--primary)]"
+              />
+            </div>
             <div className="space-y-2">
               <label htmlFor="email" className="block text-sm">
                 Email address
@@ -105,7 +117,7 @@ const Registration = () => {
           </div>
           <button
             type="submit"
-            className="w-full px-8 py-3 font-semibold rounded-md bg-[var(--primary-dark)] hover:bg-[var(--primary-light)] text-gray-900"
+            className="mainbtn w-full px-8 py-3 font-semibold rounded-md bg-[var(--primary-dark)] hover:bg-[var(--primary-light)] text-gray-900"
           >
             Signup
           </button>

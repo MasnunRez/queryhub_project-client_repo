@@ -1,9 +1,10 @@
 import React from "react";
-import { Link, useLoaderData } from "react-router";
 import MyQueriesCard from "../Components/MyQueriesCard";
+import { Link } from "react-router";
+import MyQueryList from "./MyQueryList";
 
 const MyQueries = () => {
-  const queries = useLoaderData()
+  
   return (
     <div className="max-w-[1400px] mx-auto">
       {/* Banner with Add queries ----  */}
@@ -30,15 +31,9 @@ const MyQueries = () => {
         </div>
       </div>
       {/* My Queries section ------------- */}
-      <div className="mt-8">
-        <h2>My Queries</h2>
-        <p className="text-center">Total: 10</p>
-        {/* Card ---------- */}
-        {
-          queries.map(query => (
-            <MyQueriesCard key={query._id} query={query}></MyQueriesCard>
-          ))
-        }
+      <div className="">
+        <p>My Total Queries: </p>
+        <MyQueryList></MyQueryList>
       </div>
     </div>
   );

@@ -1,14 +1,24 @@
-import React from "react";
+import React, { useContext } from "react";
 import Swal from "sweetalert2";
+import { valueContext } from "../Layout";
 
 const AddQueries = () => {
+  const { user } = useContext(valueContext)
 
     const handleAddQuery = (e)=>{
       e.preventDefault()
       const form = e.target
       const formData = new FormData(form)
-      const newQuery = Object.fromEntries(formData.entries())
+      const queryData = Object.fromEntries(formData.entries())
       // console.log(newQuery);
+      const newQuery = {
+      queryData,
+      email: user?.email,
+      userName: user?.displayName,
+      userImage: user?.photoURL,
+      // dateTime: new Date().toISOString(),
+      recommendationCount: 0,
+    };
 
       fetch("http://localhost:5000/queries",{
         method:"POST",
@@ -92,7 +102,7 @@ const AddQueries = () => {
                   className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800"
                   placeholder="Name"
                 />
-                  <button type="submit" className="mt-5 w-sm">
+                  <button type="submit" className="mt-5 w-sm mainbtn">
                     Add Query
                   </button>
               </form>
