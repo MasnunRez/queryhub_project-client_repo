@@ -1,5 +1,6 @@
+import axios from "axios";
 import React from "react";
-import { useLoaderData } from "react-router";
+import { useLoaderData, useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
 const UpdateQuery = () => {
@@ -12,6 +13,7 @@ const UpdateQuery = () => {
     productName,
     productBrand,
   } = queryData;
+  const navigate = useNavigate()
   const handleUpdateQuery = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -21,14 +23,9 @@ const UpdateQuery = () => {
     };
     // console.log(newQuery);
 
-    fetch(`http://localhost:5000/queries/${_id}`, {
-      method: "PUT",
-      headers: { "Content-type": "application/json" },
-      body: JSON.stringify(updatedQuery),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount) {
+    axios.put(`${import.meta.env.VITE_API_URL}/queries/${_id}`, updatedQuery)
+    .then((data) => {
+        if (data.data.modifiedCount) {
           Swal.fire({
             position: "top-end",
             icon: "success",
@@ -36,8 +33,10 @@ const UpdateQuery = () => {
             showConfirmButton: false,
             timer: 1500,
           });
+          navigate('/myqueries')
         }
       });
+
   };
   return (
     <div>

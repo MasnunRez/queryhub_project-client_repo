@@ -18,10 +18,10 @@ const Slider = () => {
       >
 
         <SwiperSlide className="">
-          <img src="/assets/Hero Slider 1.png" alt="" />
+          <img src="/assets/Hero Slider 2.png" alt="" />
         </SwiperSlide>
         <SwiperSlide>
-          <img src="/assets/Hero Slider 2.png" alt="" />
+          <img src="/assets/Hero Slider 1.png" alt="" />
         </SwiperSlide>
 
       </Swiper>

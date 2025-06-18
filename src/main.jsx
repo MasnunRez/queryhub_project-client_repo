@@ -14,6 +14,7 @@ import Login from "./Pages/Login";
 import AddQueries from "./Pages/AddQueries";
 import { PrivateRoute } from "./Components/NavBar";
 import UpdateQuery from "./Pages/UpdateQuery";
+import QueryDetails from "./Pages/QueryDetails";
 
 const router = createBrowserRouter([
   {
@@ -26,7 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: "queries",
-        loader: () => fetch("http://localhost:5000/queries"),
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/queries`),
         element: <Queries></Queries>,
       },
       {
@@ -67,8 +68,12 @@ const router = createBrowserRouter([
       },
       {
         path: "updatequeries/:id",
-        loader: ({params})=>fetch(`http://localhost:5000/queries/${params.id}`),
+        loader: ({params})=>fetch(`${import.meta.env.VITE_API_URL}/queries/${params.id}`),
         element: <UpdateQuery></UpdateQuery>,
+      },
+      {
+        path: "querydetails",
+        element: <QueryDetails></QueryDetails>,
       },
       {
         path: "/*",

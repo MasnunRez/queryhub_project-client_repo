@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import Swal from "sweetalert2";
 import { valueContext } from "../Layout";
+import { useNavigate } from "react-router";
 
 const AddQueries = () => {
   const { user } = useContext(valueContext)
+  const navigate = useNavigate()
 
     const handleAddQuery = (e)=>{
       e.preventDefault()
@@ -17,10 +19,10 @@ const AddQueries = () => {
       userName: user?.displayName,
       userImage: user?.photoURL,
       // dateTime: new Date().toISOString(),
-      recommendationCount: 0,
+      recommendationCount: [],
     };
 
-      fetch("http://localhost:5000/queries",{
+      fetch(`${import.meta.env.VITE_API_URL}/queries`,{
         method:"POST",
         headers:{"Content-type":"application/json"},
         body:JSON.stringify(newQuery)
@@ -34,6 +36,7 @@ const AddQueries = () => {
             icon: "success",
             draggable: true,
           });
+          navigate('/myqueries')
         //   form.reset()
         }
       })
