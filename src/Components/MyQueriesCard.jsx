@@ -45,7 +45,7 @@ const MyQueriesCard = ({ myQuery, queries, setQueries }) => {
   };
 
   return (
-    <div className="flex gap-4 p-4 bg-gray-200 rounded-2xl my-4">
+    <div className="flex gap-4 p-4 bg-gray-200 rounded-2xl my-4 mx-5">
       <div className="">
         <img className="w-[200px]" src={productImageUrl} alt="" />
       </div>

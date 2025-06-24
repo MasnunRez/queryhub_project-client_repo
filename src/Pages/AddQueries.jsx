@@ -15,9 +15,9 @@ const AddQueries = () => {
       // console.log(newQuery);
       const newQuery = {
       queryData,
-      email: user?.email,
-      userName: user?.displayName,
-      userImage: user?.photoURL,
+      email: user.email,
+      userName: user.displayName,
+      userImage: user.photoURL,
       // dateTime: new Date().toISOString(),
       recommendationCount: [],
     };

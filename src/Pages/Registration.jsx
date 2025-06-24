@@ -1,21 +1,53 @@
 import React, { useContext } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { valueContext } from "../Layout";
-
+import { updateProfile } from "firebase/auth";
+import Swal from "sweetalert2";
 
 const Registration = () => {
-    const {handleSignup} = useContext(valueContext)
-    
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      const regEmail = e.target.email.value;
-      const regPassword = e.target.password.value;
-      console.log(regEmail, regPassword);
-      //   navigate(from, {replace:true});
-        handleSignup(regEmail, regPassword)
-    };
+  const { handleSignup, setUser } = useContext(valueContext);
+  const navigate = useNavigate();
 
-    
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const regName = e.target.name.value;
+    const regPhotoUrl = e.target.photoUrl.value;
+    const regEmail = e.target.email.value;
+    const regPassword = e.target.password.value;
+    console.log(regEmail, regPassword);
+    // navigate(from, {replace:true});
+    handleSignup(regEmail, regPassword)
+      .then((userCredential) => {
+        const user = userCredential.user;
+
+        return updateProfile(user, {
+          displayName: regName,
+          photoURL: regPhotoUrl,
+        }).then(() => {
+          setUser({
+            ...user,
+            displayName: regName,
+            photoURL: regPhotoUrl,
+          });
+        });
+      })
+      .then(() => {
+        Swal.fire({
+          icon: "success",
+          title: "Registration Successful!",
+        });
+        navigate("/");
+      })
+      .catch((error) => {
+        console.error(error);
+        Swal.fire({
+          icon: "error",
+          title: "Registration Failed",
+          text: error.message,
+        });
+      });
+  };
+
   return (
     <div className="">
       <div className="w-full max-w-md mx-auto mt-10 p-4 rounded-md shadow sm:p-8 bg-gray-200 text-black">

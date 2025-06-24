@@ -72,7 +72,8 @@ const router = createBrowserRouter([
         element: <UpdateQuery></UpdateQuery>,
       },
       {
-        path: "querydetails",
+        path: "querydetails/:id",
+        loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/queries/${params.id}`),
         element: <QueryDetails></QueryDetails>,
       },
       {
