@@ -20,16 +20,36 @@ const MyRecommendation = () => {
   }, [user]);
 
 //   Delete Recommendation ----- 
-  
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to recover this recommendation!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`http://localhost:5000/recommendations/${id}`)
+          .then((res) => {
+            if (res.data.deletedCount === 1) {
+              setRecommendations((prev) => prev.filter((item) => item._id !== id));
+              Swal.fire("Deleted!", "Recommendation has been deleted.", "success");
+            }
+          })
+          .catch(() => Swal.fire("Error", "Something went wrong.", "error"));
+      }
+    });
+  };
 
 
   return (
     <div className="max-w-[1400px] mx-auto my-10">
-      <h2 className="text-2xl font-bold mb-4">My Recommendations</h2>
+      <h2 className="text-2xl font-bold mb-10">My Recommendations</h2>
       {recommendations.length === 0 ? (
         <p>No recommendations yet.</p>
       ) : (
-        <table className="min-w-full text-sm text-left border-collapse border rounded-2xl mx-[100px]">
+        <table className="min-w-full text-sm text-left border-collapse border rounded-2xl">
           <thead className="bg-[var(--primary)] text-white rounded-2xl">
             <tr>
               <th className="px-3 py-2">#</th>
@@ -48,7 +68,7 @@ const MyRecommendation = () => {
                 <td className="px-3 py-2">{index + 1}</td>
                 <td className="px-3 py-2">{rec.queryTitle || "N/A"}</td>
                 <td className="px-3 py-2">{rec.recoTitle}</td>
-                <td className="px-3 py-2">{rec.recoProductImage}</td>
+                <td className="px-3 py-2"><img src={rec.recoProductImage} alt="Product" className="w-20 h-20 object-cover" /></td>
                 <td className="px-3 py-2">{rec.recoProductName}</td>
                 <td className="px-3 py-2">{rec.recoReason}</td>
                 <td className="px-3 py-2">
@@ -58,7 +78,7 @@ const MyRecommendation = () => {
                 </td>
                 <td className="px-3 py-2">
                   <button
-                    
+                    onClick={() => handleDelete(rec._id)}
                     className="px-2 py-1 text-red-600 hover:underline"
                   >
                     Delete
