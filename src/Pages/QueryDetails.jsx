@@ -32,11 +32,13 @@ const QueryDetails = () => {
     const recommendationData = {
       queryId,
       recommender: user.email,
+      queryCreator:query.email,
       recoTitle,
       recoProductName,
       recoProductImage,
       recoReason,
       createdAt,
+      queryTitle:query.queryData.queryTitle
     };
     // console.log(recommendationData);
     axios

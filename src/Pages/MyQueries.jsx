@@ -40,10 +40,6 @@ const MyQueries = () => {
       <div className="bg-[var(--primary)] rounded-2xl pb-5">
       <h2 className="my-[50px] text-white pt-10">My Queries</h2>
 
-        {
-          myQueryPromise.length===0 ? (<p>No queries found.</p>):
-        (<p className="text-white mx-5">My Total Queries: {myQueryPromise.length}</p>)
-        }
         <Suspense fallback={'Loading query'}>
           <MyQueryList myQueryPromise={myQueryPromise(user.email)}>
 
