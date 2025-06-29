@@ -9,7 +9,9 @@ const RecoForMe = () => {
   useEffect(() => {
     if (user?.email) {
       axios
-        .get(`http://localhost:5000/recommendations/forme?email=${user.email}`)
+        .get(
+          `${import.meta.env.VITE_API_URL}/recommendations/forme?email=${user.email}`
+        )
         .then((res) => setRecommendations(res.data))
         .catch((err) => console.error(err));
     }

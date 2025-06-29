@@ -1,14 +1,16 @@
-import React, { Suspense, useContext} from "react";
+import React, { Suspense, useContext } from "react";
 import { Link } from "react-router";
 import MyQueryList from "./MyQueryList";
 import { valueContext } from "../Layout";
 
-const myQueryPromise = email =>{
-  return fetch(`http://localhost:5000/queries/email?email=${email}`).then(res=>res.json())
-}
+const myQueryPromise = (email) => {
+  return fetch(
+    `${import.meta.env.VITE_API_URL}/queries/email?email=${email}`
+  ).then((res) => res.json());
+};
 
 const MyQueries = () => {
-  const {user}=useContext(valueContext)
+  const { user } = useContext(valueContext);
   // const [myQueries, setMyQueries] = useState([]);
 
   return (
@@ -38,12 +40,12 @@ const MyQueries = () => {
       </div>
       {/* My Queries section ------------- */}
       <div className="bg-[var(--primary)] rounded-2xl pb-5">
-      <h2 className="my-[50px] text-white pt-10">My Queries</h2>
+        <h2 className="my-[50px] text-white pt-10">My Queries</h2>
 
-        <Suspense fallback={'Loading query'}>
-          <MyQueryList myQueryPromise={myQueryPromise(user.email)}>
-
-          </MyQueryList>
+        <Suspense fallback={"Loading query"}>
+          <MyQueryList
+            myQueryPromise={myQueryPromise(user.email)}
+          ></MyQueryList>
         </Suspense>
       </div>
     </div>

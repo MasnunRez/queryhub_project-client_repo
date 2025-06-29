@@ -21,7 +21,7 @@ const MyQueriesCard = ({ myQuery, queries, setQueries }) => {
       // console.log(result.isConfirmed);
       if (result.isConfirmed) {
         //Start Deleting query ------------
-        fetch(`http://localhost:5000/queries/${_id}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/queries/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -54,12 +54,10 @@ const MyQueriesCard = ({ myQuery, queries, setQueries }) => {
         <p>Product: {productName}</p>
         <p>Details: {boycottingReason}</p>
         <div className="space-x-3 mt-4">
-            <Link to={`/querydetails/${myQuery._id}`}>
-              <button className="hover:underline font-bold">
-                View details
-              </button>
-            </Link>
-          
+          <Link to={`/querydetails/${myQuery._id}`}>
+            <button className="hover:underline font-bold">View details</button>
+          </Link>
+
           {/* <button className="hover:underline font-bold">View details</button> */}
           <Link to={`/updatequeries/${_id}`}>
             <button className="text-green-600 font-bold hover:underline">

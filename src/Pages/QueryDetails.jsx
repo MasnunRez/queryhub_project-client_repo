@@ -10,18 +10,19 @@ const QueryDetails = () => {
   const { queryTitle } = query.queryData;
   const { userName, userImage } = query || {};
   const [recommendations, setRecommendations] = useState([]);
-  
+
   //Get the query ID-------
   const { id: queryId } = useParams();
   console.log(queryId);
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/recommendations/query/${queryId}`)
+      .get(
+        `${import.meta.env.VITE_API_URL}/recommendations/query/${queryId}`
+      )
       .then((res) => setRecommendations(res.data))
       .catch((err) => console.error(err));
   }, [queryId]);
-
 
   //Logged in User info-------
   const { user } = useAuth();
@@ -51,7 +52,10 @@ const QueryDetails = () => {
     };
     // console.log(recommendationData);
     axios
-      .post("http://localhost:5000/recommendations", recommendationData)
+      .post(
+        `${import.meta.env.VITE_API_URL}/recommendations`,
+        recommendationData
+      )
       .then((res) => {
         // console.log(res.data);
         if (res.data.insertedId) {

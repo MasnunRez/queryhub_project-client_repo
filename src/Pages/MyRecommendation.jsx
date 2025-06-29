@@ -11,7 +11,7 @@ const MyRecommendation = () => {
   useEffect(() => {
     axios
       .get(
-        `http://localhost:5000/recommendations/recommender?recommender=${user.email}`
+        `${import.meta.env.VITE_API_URL}/recommendations/recommender?recommender=${user.email}`
       )
       .then((res) => {
         setRecommendations(res.data);
@@ -19,7 +19,7 @@ const MyRecommendation = () => {
       });
   }, [user]);
 
-//   Delete Recommendation ----- 
+  //   Delete Recommendation -----
   const handleDelete = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -30,18 +30,25 @@ const MyRecommendation = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/recommendations/${id}`)
+          .delete(
+            `${import.meta.env.VITE_API_URL}/recommendations/${id}`
+          )
           .then((res) => {
             if (res.data.deletedCount === 1) {
-              setRecommendations((prev) => prev.filter((item) => item._id !== id));
-              Swal.fire("Deleted!", "Recommendation has been deleted.", "success");
+              setRecommendations((prev) =>
+                prev.filter((item) => item._id !== id)
+              );
+              Swal.fire(
+                "Deleted!",
+                "Recommendation has been deleted.",
+                "success"
+              );
             }
           })
           .catch(() => Swal.fire("Error", "Something went wrong.", "error"));
       }
     });
   };
-
 
   return (
     <div className="max-w-[1400px] mx-auto my-10">
@@ -68,7 +75,13 @@ const MyRecommendation = () => {
                 <td className="px-3 py-2">{index + 1}</td>
                 <td className="px-3 py-2">{rec.queryTitle || "N/A"}</td>
                 <td className="px-3 py-2">{rec.recoTitle}</td>
-                <td className="px-3 py-2"><img src={rec.recoProductImage} alt="Product" className="w-20 h-20 object-cover" /></td>
+                <td className="px-3 py-2">
+                  <img
+                    src={rec.recoProductImage}
+                    alt="Product"
+                    className="w-20 h-20 object-cover"
+                  />
+                </td>
                 <td className="px-3 py-2">{rec.recoProductName}</td>
                 <td className="px-3 py-2">{rec.recoReason}</td>
                 <td className="px-3 py-2">
