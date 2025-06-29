@@ -15,7 +15,7 @@ const QueriesCard = ({query}) => {
             <p>Product: {productName}</p>
             <p>Details: {boycottingReason}</p>
             <div className="space-x-3 mt-4">
-              <p>Total Recommendation: {recommendationCount.length} </p>
+              <p>Total Recommendation: {recommendationCount} </p>
             </div>
             <div className="">
               <Link to={`/querydetails/${query._id}`}><button className="text-green-600 font-bold hover:bg-green-200 border px-4 rounded-2xl mt-2">Recommend</button></Link>

@@ -54,7 +54,13 @@ const MyQueriesCard = ({ myQuery, queries, setQueries }) => {
         <p>Product: {productName}</p>
         <p>Details: {boycottingReason}</p>
         <div className="space-x-3 mt-4">
-          <button className="hover:underline font-bold">View details</button>
+            <Link to={`/querydetails/${myQuery._id}`}>
+              <button className="hover:underline font-bold">
+                View details
+              </button>
+            </Link>
+          
+          {/* <button className="hover:underline font-bold">View details</button> */}
           <Link to={`/updatequeries/${_id}`}>
             <button className="text-green-600 font-bold hover:underline">
               Update

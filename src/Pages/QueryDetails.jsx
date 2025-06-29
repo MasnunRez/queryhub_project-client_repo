@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLoaderData, useParams } from "react-router";
 import useAuth from "../Components/useAuth";
 import { GrFormRefresh } from "react-icons/gr";
@@ -9,10 +9,19 @@ const QueryDetails = () => {
   const query = useLoaderData();
   const { queryTitle } = query.queryData;
   const { userName, userImage } = query || {};
-
+  const [recommendations, setRecommendations] = useState([]);
+  
   //Get the query ID-------
   const { id: queryId } = useParams();
   console.log(queryId);
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/recommendations/query/${queryId}`)
+      .then((res) => setRecommendations(res.data))
+      .catch((err) => console.error(err));
+  }, [queryId]);
+
 
   //Logged in User info-------
   const { user } = useAuth();
@@ -32,13 +41,13 @@ const QueryDetails = () => {
     const recommendationData = {
       queryId,
       recommender: user.email,
-      queryCreator:query.email,
+      queryCreator: query.email,
       recoTitle,
       recoProductName,
       recoProductImage,
       recoReason,
       createdAt,
-      queryTitle:query.queryData.queryTitle
+      queryTitle: query.queryData.queryTitle,
     };
     // console.log(recommendationData);
     axios
@@ -131,6 +140,47 @@ const QueryDetails = () => {
           </form>
         </div>
       </div>
+      <h3 className="text-2xl font-bold my-10">All Recommendations</h3>
+      {recommendations.length === 0 ? (
+        <p>No recommendations yet.</p>
+      ) : (
+        <table className="min-w-full text-sm text-left border-collapse border rounded-2xl">
+          <thead className="bg-[var(--primary)] text-white rounded-2xl">
+            <tr>
+              <th className="px-3 py-2">#</th>
+              <th className="px-3 py-2">Query Title</th>
+              <th className="px-3 py-2">Recommendation Title</th>
+              <th className="px-3 py-2">Product Image</th>
+              <th className="px-3 py-2">Product Name</th>
+              <th className="px-3 py-2">Reason</th>
+              <th className="px-3 py-2">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            {recommendations.map((rec, index) => (
+              <tr key={rec._id} className="border-b even:bg-gray-50">
+                <td className="px-3 py-2">{index + 1}</td>
+                <td className="px-3 py-2">{rec.queryTitle || "N/A"}</td>
+                <td className="px-3 py-2">{rec.recoTitle}</td>
+                <td className="px-3 py-2">
+                  <img
+                    src={rec.recoProductImage}
+                    alt="Product"
+                    className="w-20 h-20 object-cover"
+                  />
+                </td>
+                <td className="px-3 py-2">{rec.recoProductName}</td>
+                <td className="px-3 py-2">{rec.recoReason}</td>
+                <td className="px-3 py-2">
+                  {new Date(rec.createdAt).toLocaleString("en-BD", {
+                    timeZone: "Asia/Dhaka",
+                  })}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
     </div>
   );
 };

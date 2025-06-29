@@ -18,8 +18,8 @@ const AddQueries = () => {
       email: user.email,
       userName: user.displayName,
       userImage: user.photoURL,
-      // dateTime: new Date().toISOString(),
-      recommendationCount: [],
+      createdAt: new Date(),
+      recommendationCount: 0,
     };
 
       fetch(`${import.meta.env.VITE_API_URL}/queries`,{
