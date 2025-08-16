@@ -101,7 +101,7 @@ const NavBar = () => {
           </a>
         </div>
         <div className="navbar-center hidden md:flex">
-          <ul className="menu menu-horizontal px-1 font-bold">
+          <ul className="menu space-x-4 menu-horizontal px-1 font-bold">
             <NavLink
               className="border border-gray-300 p-2 hover:text-[var(--primary)]"
               to="/"
