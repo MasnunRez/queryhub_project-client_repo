@@ -27,7 +27,7 @@ const Queries = () => {
       {/* Card ---------- */}
       <div className={`grid gap-6 ${grid[cols]}`}>
       {queries.map((query) => (
-        <QueriesCard key={query._id} query={query}></QueriesCard>
+        <QueriesCard key={query._id} query={query} cols={cols}></QueriesCard>
       ))}
 
       </div>
