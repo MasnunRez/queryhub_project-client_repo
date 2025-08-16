@@ -11,7 +11,7 @@ const Queries = () => {
       <h2>All Queries</h2>
       <p className="text-center">Total: {queries.length}</p>
       {/* layout toggle */}
-      <div className="flex gap-2 justify-end mb-4">
+      <div className="flex gap-2 justify-end mt-6 mx-5 lg:mx-0">
         {[1, 2, 3].map((n) => (
           <button
             key={n}
@@ -25,7 +25,7 @@ const Queries = () => {
         ))}
       </div>
       {/* Card ---------- */}
-      <div className={`grid gap-6 ${grid[cols]}`}>
+      <div className={`mx-5 lg:mx-0 grid gap-6 ${grid[cols]}`}>
       {queries.map((query) => (
         <QueriesCard key={query._id} query={query} cols={cols}></QueriesCard>
       ))}

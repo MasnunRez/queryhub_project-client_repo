@@ -8,7 +8,7 @@ const QueriesCard = ({query, cols}) => {
   const isOneCols = cols === 1;
 
     return (
-        <div className={`mx-5 lg:mx-0 p-4 bg-gray-50 border border-gray-200 rounded-2xl my-4
+        <div className={`p-4 bg-gray-50 border border-gray-200 rounded-2xl my-4
         ${
           isOneCols ? "flex gap-5" : "flex flex-col gap-5"
         }`}>

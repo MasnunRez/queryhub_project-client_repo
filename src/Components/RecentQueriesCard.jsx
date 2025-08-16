@@ -6,7 +6,7 @@ const RecentQueriesCard = ({ query }) => {
     query.queryData;
   const { recommendationCount } = query;
   return (
-    <div className="gap-4 p-4 bg-gray-200 rounded-2xl my-4">
+    <div className="gap-4 p-4 bg-gray-50 border border-gray-200 rounded-2xl my-4">
       <div className="">
         <img className="w-[200px]" src={productImageUrl} alt="" />
       </div>
