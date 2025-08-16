@@ -77,7 +77,7 @@ const NavBar = () => {
               </li>
             </ul>
           </div>
-          <a className="font-bold text-2xl">
+          <a href="/" className="font-bold text-2xl">
             <span className="text-[var(--primary)]">Q</span>uery{" "}
             <span className="text-[var(--primary)]">H</span>ub
           </a>
