@@ -58,23 +58,41 @@ const NavBar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
-              <li>
-                <a>Item 1</a>
-              </li>
-              <li>
-                <a>Parent</a>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a>Item 3</a>
-              </li>
+              <NavLink
+              className="border border-gray-300 p-2 hover:text-[var(--primary)]"
+              to="/"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              className="border border-gray-300 p-2 hover:text-[var(--primary)]"
+              to="queries"
+            >
+              Queries
+            </NavLink>
+
+            {user && (
+              <>
+                <NavLink
+                  className="border border-gray-300 p-2 hover:text-[var(--primary)]"
+                  to="recforme"
+                >
+                  Recommendation For Me
+                </NavLink>
+                <NavLink
+                  className="border border-gray-300 p-2 hover:text-[var(--primary)]"
+                  to="myqueries"
+                >
+                  My Queries
+                </NavLink>
+                <NavLink
+                  className="border border-gray-300 p-2 hover:text-[var(--primary)]"
+                  to="myrecommendation"
+                >
+                  My Recommendation
+                </NavLink>
+              </>
+            )}
             </ul>
           </div>
           <a href="/" className="font-bold text-2xl">
