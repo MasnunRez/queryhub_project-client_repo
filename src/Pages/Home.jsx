@@ -16,8 +16,8 @@ const Home = () => {
         <Slider></Slider>
       </div>
       {/* Recent queries Section ----  */}
-      <div className="max-w-[1400px] mx-auto my-10">
-        <h2>Recent Queries</h2>
+      <div className=" max-w-[1400px] mx-auto my-10">
+        <h2 className="mb-5">Recent Queries</h2>
         <div className="grid gap-5 lg:grid-cols-3 md:grid-cols-2 mx-5">
           
           {/* Enter new queries...........  */}

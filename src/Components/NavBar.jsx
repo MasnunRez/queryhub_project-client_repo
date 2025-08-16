@@ -34,10 +34,10 @@ const NavBar = () => {
   };
   return (
     <div className=" shadow-sm">
-      <div className="max-w-[1400px] mx-auto navbar bg-base-100  ">
+      <div className="lg:max-w-[1400px] mx-auto navbar bg-base-100  ">
         <div className="navbar-start">
           <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost md:hidden">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
@@ -100,16 +100,16 @@ const NavBar = () => {
             <span className="text-[var(--primary)]">H</span>ub
           </a>
         </div>
-        <div className="navbar-center hidden md:flex">
+        <div className="navbar-center hidden lg:flex">
           <ul className="menu space-x-4 menu-horizontal px-1 font-bold">
             <NavLink
-              className="border border-gray-300 p-2 hover:text-[var(--primary)]"
+              className="p-2 hover:text-[var(--primary)]"
               to="/"
             >
               Home
             </NavLink>
             <NavLink
-              className="border border-gray-300 p-2 hover:text-[var(--primary)]"
+              className="p-2 hover:text-[var(--primary)]"
               to="queries"
             >
               Queries
@@ -118,19 +118,19 @@ const NavBar = () => {
             {user && (
               <>
                 <NavLink
-                  className="border border-gray-300 p-2 hover:text-[var(--primary)]"
+                  className="p-2 hover:text-[var(--primary)]"
                   to="recforme"
                 >
                   Recommendation For Me
                 </NavLink>
                 <NavLink
-                  className="border border-gray-300 p-2 hover:text-[var(--primary)]"
+                  className="p-2 hover:text-[var(--primary)]"
                   to="myqueries"
                 >
                   My Queries
                 </NavLink>
                 <NavLink
-                  className="border border-gray-300 p-2 hover:text-[var(--primary)]"
+                  className="p-2 hover:text-[var(--primary)]"
                   to="myrecommendation"
                 >
                   My Recommendation

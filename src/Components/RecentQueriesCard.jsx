@@ -10,7 +10,7 @@ const RecentQueriesCard = ({ query }) => {
       <div className="">
         <img className="w-[200px]" src={productImageUrl} alt="" />
       </div>
-      <div className="">
+      <div className="mt-4">
         <h3 className="text-2xl font-bold mb-4">{queryTitle}</h3>
         <p>Product: {productName}</p>
         <p>Details: {boycottingReason}</p>
