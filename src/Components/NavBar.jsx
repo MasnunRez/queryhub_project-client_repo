@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, Navigate, NavLink, useLocation } from "react-router";
+import { Link, NavLink, useLocation, Navigate } from "react-router";
 import { valueContext } from "../Layout";
 
 // Private Route ---
@@ -14,150 +14,157 @@ export const PrivateRoute = ({ children }) => {
       </div>
     );
   }
-  if(!user || !user?.email){
-    return <Navigate to="/login" state={{from:location.pathname}} replace></Navigate>
+  if (!user || !user?.email) {
+    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
   }
-  return children
+  return children;
 };
 
 const NavBar = () => {
-  // Bring Logout auth ---------------
   const { user, logoutUser } = useContext(valueContext);
-  // console.log(user);
-  // Set Logout User ------------------------------
+
   const handleLogout = () => {
     logoutUser()
       .then(() => {})
-      .catch((error) => {
-        alert("Logout Error!!!", error);
-      });
+      .catch((error) => alert("Logout Error!!!", error));
   };
+
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "Queries", path: "/queries" },
+  ];
+
+  const userLinks = [
+    { name: "Recommendation For Me", path: "/recforme" },
+    { name: "My Queries", path: "/myqueries" },
+    { name: "My Recommendation", path: "/myrecommendation" },
+  ];
+
   return (
-    <div className=" shadow-sm">
-      <div className="lg:max-w-[1400px] mx-auto navbar bg-base-100  ">
-        <div className="navbar-start">
-          <div className="dropdown">
-            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                {" "}
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h8m-8 6h16"
-                />{" "}
-              </svg>
-            </div>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
+    <nav className="bg-[var(--primary)] shadow-md sticky top-0 z-50">
+      <div className="max-w-[1400px] mx-auto flex items-center justify-between px-4 py-3">
+        {/* Logo */}
+        <Link to="/" className="text-2xl font-bold text-white">
+          <span className="text-white/90">Q</span>uery{" "}
+          <span className="text-white/90">H</span>ub
+        </Link>
+
+        {/* Desktop Links */}
+        <div className="hidden lg:flex space-x-6 font-semibold text-white">
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.path}
+              to={link.path}
+              className={({ isActive }) =>
+                `hover:text-white/80 transition-colors ${isActive ? "underline underline-offset-4" : ""}`
+              }
             >
+              {link.name}
+            </NavLink>
+          ))}
+          {user &&
+            userLinks.map((link) => (
               <NavLink
-              className="border border-gray-300 p-2 hover:text-[var(--primary)]"
-              to="/"
-            >
-              Home
-            </NavLink>
-            <NavLink
-              className="border border-gray-300 p-2 hover:text-[var(--primary)]"
-              to="queries"
-            >
-              Queries
-            </NavLink>
-
-            {user && (
-              <>
-                <NavLink
-                  className="border border-gray-300 p-2 hover:text-[var(--primary)]"
-                  to="recforme"
-                >
-                  Recommendation For Me
-                </NavLink>
-                <NavLink
-                  className="border border-gray-300 p-2 hover:text-[var(--primary)]"
-                  to="myqueries"
-                >
-                  My Queries
-                </NavLink>
-                <NavLink
-                  className="border border-gray-300 p-2 hover:text-[var(--primary)]"
-                  to="myrecommendation"
-                >
-                  My Recommendation
-                </NavLink>
-              </>
-            )}
-            </ul>
-          </div>
-          <a href="/" className="font-bold text-2xl">
-            <span className="text-[var(--primary)]">Q</span>uery{" "}
-            <span className="text-[var(--primary)]">H</span>ub
-          </a>
+                key={link.path}
+                to={link.path}
+                className={({ isActive }) =>
+                  `hover:text-white/80 transition-colors ${isActive ? "underline underline-offset-4" : ""}`
+                }
+              >
+                {link.name}
+              </NavLink>
+            ))}
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu space-x-4 menu-horizontal px-1 font-bold">
-            <NavLink
-              className="p-2 hover:text-[var(--primary)]"
-              to="/"
-            >
-              Home
-            </NavLink>
-            <NavLink
-              className="p-2 hover:text-[var(--primary)]"
-              to="queries"
-            >
-              Queries
-            </NavLink>
 
-            {user && (
-              <>
-                <NavLink
-                  className="p-2 hover:text-[var(--primary)]"
-                  to="recforme"
-                >
-                  Recommendation For Me
-                </NavLink>
-                <NavLink
-                  className="p-2 hover:text-[var(--primary)]"
-                  to="myqueries"
-                >
-                  My Queries
-                </NavLink>
-                <NavLink
-                  className="p-2 hover:text-[var(--primary)]"
-                  to="myrecommendation"
-                >
-                  My Recommendation
-                </NavLink>
-              </>
-            )}
-          </ul>
-        </div>
-        {/* Login Signup, profile ----------   */}
-        <div className="navbar-end">
+        {/* Auth Buttons */}
+        <div className="hidden lg:flex space-x-3">
           {user ? (
-            <div className="">
-              <button className="mainbtn" onClick={handleLogout}>Logout</button>
-            </div>
+            <button
+              onClick={handleLogout}
+              className="px-4 py-1 rounded-lg bg-white text-[var(--primary)] font-semibold hover:bg-white/90 transition"
+            >
+              Logout
+            </button>
           ) : (
-            <div className="space-x-3">
-              <Link to="login">
-                <button className="mainbtn">Login</button>
+            <>
+              <Link to="/login">
+                <button className="px-4 py-1 rounded-lg bg-white text-[var(--primary)] font-semibold hover:bg-white/90 transition">
+                  Login
+                </button>
               </Link>
-              <Link to="registration">
-                <button className="mainbtn">Registration</button>
+              <Link to="/registration">
+                <button className="px-4 py-1 rounded-lg bg-white text-[var(--primary)] font-semibold hover:bg-white/90 transition">
+                  Register
+                </button>
               </Link>
-            </div>
+            </>
           )}
         </div>
+
+        {/* Mobile Menu */}
+        <div className="lg:hidden relative">
+          <input type="checkbox" id="menu-toggle" className="hidden peer" />
+          <label
+            htmlFor="menu-toggle"
+            className="cursor-pointer block text-white"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-6 w-6"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+          </label>
+
+          <div className="absolute right-0 mt-2 w-52 bg-white rounded-lg shadow-lg opacity-0 peer-checked:opacity-100 invisible peer-checked:visible transition-all z-50">
+            <ul className="flex flex-col p-4 space-y-2 font-semibold text-[#872341]">
+              {navLinks.map((link) => (
+                <NavLink key={link.path} to={link.path} className="hover:text-[#c2728b]/80">
+                  {link.name}
+                </NavLink>
+              ))}
+              {user &&
+                userLinks.map((link) => (
+                  <NavLink key={link.path} to={link.path} className="hover:text-[#c2728b]/80">
+                    {link.name}
+                  </NavLink>
+                ))}
+              <div className="pt-2 border-t border-gray-200">
+                {user ? (
+                  <button
+                    onClick={handleLogout}
+                    className="w-full px-4 py-1 rounded-lg bg-[var(--primary)] text-white font-semibold hover:bg-[var(--primary)] transition"
+                  >
+                    Logout
+                  </button>
+                ) : (
+                  <div className="flex flex-col space-y-2">
+                    <Link to="/login">
+                      <button className="w-full px-4 py-1 rounded-lg bg-[var(--primary)] text-white font-semibold hover:bg-[#a64d6a] transition">
+                        Login
+                      </button>
+                    </Link>
+                    <Link to="/registration">
+                      <button className="w-full px-4 py-1 rounded-lg bg-[var(--primary)] text-white font-semibold hover:bg-[#a64d6a] transition">
+                        Register
+                      </button>
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </ul>
+          </div>
+        </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
